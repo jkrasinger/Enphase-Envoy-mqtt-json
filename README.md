@@ -149,7 +149,7 @@ The preparation is done. Now you must continue with the HASSIO GUI.
 - Go to Supervisor -> Add-on Store. 
 - Click on the "Hamburger Menu" in the upper right corner and select refresh/neu laden.
 
-Now you should see the local Add-on Envoy-to-mqtt
+Now you should see the local Add-on Envoy-to-mqtt. A Page refresh (typically a press of "F5") may be necessary depending on Browser.
 
 <img src="images/Screenshot_HA-localaddon.jpg">
 
