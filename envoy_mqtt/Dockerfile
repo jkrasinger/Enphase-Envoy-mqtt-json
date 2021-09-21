@@ -12,15 +12,12 @@ MAINTAINER Johann Krasinger
 #-------------------------------------------------------------------
 WORKDIR /home
 
-COPY envoy_to_mqtt_json.py /home
-COPY requirements.txt /home
-
 # Copy data for add-on
 COPY run.sh /home
 RUN chmod a+x /home/run.sh
 
 RUN apk add --no-cache python3 git py3-pip && \
-    git clone git@github.com:jkrasinger/Enphase-Envoy-mqtt-json.git && \
+    git clone https://github.com/jkrasinger/Enphase-Envoy-mqtt-json.git && \
     cd Enphase-Envoy-mqtt-json && \
 	pip3 install -r requirements.txt
 
