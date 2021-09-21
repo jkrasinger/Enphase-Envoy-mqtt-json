@@ -124,6 +124,37 @@ systemctl status envoy
 
 Note: this should work for any linux distribution that uses systemd services, but the instructions and locations may vary slightly.
 
+## Run as HASSIO local Add-On (Home Assistant)
+
+To run as a local AddOn in HASS you must create the configuration in the HASS local Filesystem.
+Best use the "Terminal & SSH" or the "Samba share" Add-on.
+
+After logging in to HASS you are directed to the /root directory. There should be an addons subdir besides the backup, config and share subdirs.
+If there is no **addons** subdir create one
+```
+mkdir addons
+```
+Change into this subdir
+```
+cd addons
+```
+Now create the specific Add-on Subdirectory _envoy_mqtt_ (same name as in this repository)
+```
+mkdir envoy_mqtt
+```
+Now copy all files from the Folder **envoy_mqtt** from repository (config.json, Dockerfile, run.sh) into the newly created Folder.
+
+The preparation is done. Now you must continue with the HASSIO GUI.
+
+- Go to Supervisor -> Add-on Store. 
+- Click on the "Hamburger Menu" in the upper right corner and select refresh/neu laden.
+
+Now you should see the local Add-on Envoy-to-mqtt
+
+<img src="images/Screenshot_HA-localaddon.jpg">
+
+Continue installing this addon same way as other addons (Don't forget the Configuration!)
+
 ## Example output
 The resulting mqtt topic should look like this example:
 ```
