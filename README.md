@@ -24,7 +24,15 @@ python setup.py install
 ## Install
 
 - Copy to host
-- Configure settings in `envoy_to_mqtt_json.py`
+- ~~Configure settings in `envoy_to_mqtt_json.py`~~
+- Add/Create Environment Variables for settings
+   - ENVOY_MQTTHOST ....... (Default: hassio.local)
+   - ENVOY_MQTTPORT ....... (Default: 1883)
+   - ENVOY_MQTTTOPIC ...... (Default: /envoy/json)
+   - ENVOY_MQTTUSER
+   - ENVOY_MQTTPASS
+   - ENVOY_HOST ........... (Default: envoy.local)
+   - ENVOY_PW
 
 ## Run Script
 ```

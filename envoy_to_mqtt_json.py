@@ -13,6 +13,7 @@ import requests
 import threading
 from requests.auth import HTTPDigestAuth
 import pprint
+import os
 
 import paho.mqtt.client as mqtt
 client = mqtt.Client()
@@ -20,7 +21,7 @@ client = mqtt.Client()
 pp = pprint.PrettyPrinter()
 
 #
-##### Settings Start here
+##### Settings Start here (if no EVNIRONMENT Variables are/will be set, else do not change anything)
 #
 # I use the Home Assistant Mosquitto broker add-on.
 #
@@ -30,17 +31,17 @@ pp = pprint.PrettyPrinter()
 # 
 # Note - if issues connecting, use FQDN for broker IP instead of hassio.local
 #
-MQTT_HOST = "hassio.local"
-MQTT_PORT = "1883"
-MQTT_TOPIC = "/envoy/json"  # Note - if you change this topic, you'll need to also change the value_templates in configuration.yaml
-MQTT_USER = "secret"
-MQTT_PASSWORD = "secret"
+MQTT_HOST = os.environ.get('ENVOY_MQTTHOST', 'hassio.local')
+MQTT_PORT = os.environ.get('ENVOY_MQTTPORT', '1883')
+MQTT_TOPIC = os.environ.get('ENVOY_MQTTTOPIC', '/envoy/json')
+MQTT_USER = os.environ.get('ENVOY_MQTTUSER', '')
+MQTT_PASSWORD = os.environ.get('ENVOY_MQTTPASS', '')
 #
 # envoy-s host IP
 #  ** Note - use FQDN and not envoy.local if issues connecting
-host = 'envoy.local'
+host = os.environ.get('ENVOY_HOST', '')
 # envoy installer password - generate from seperate python script
-password = 'secret'
+password = os.environ.get('ENVOY_PW', '')
 #
 ####  End Settings - no changes after this line
 #
@@ -115,7 +116,7 @@ client.on_disconnect = on_disconnect
 
 client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 
-client.connect(MQTT_HOST,int(MQTT_PORT), 30)
+client.connect(MQTT_HOST, int(MQTT_PORT), 30)
 
 client.loop_start()
 
@@ -141,6 +142,7 @@ data: {
 def scrape_stream():
     while True:
         try:
+            print('Starting/Restarting stream')
             url = 'http://%s/stream/meter' % host
             stream = requests.get(url, auth=auth, stream=True, timeout=5)
             for line in stream.iter_lines():
