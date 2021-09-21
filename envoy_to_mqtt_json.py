@@ -21,7 +21,7 @@ client = mqtt.Client()
 pp = pprint.PrettyPrinter()
 
 #
-##### Settings Start here (if no EVNIRONMENT Variables are/will be set, else do not change anything)
+# ------- Settings Start here (if no EVNIRONMENT Variables are/will be set, else do not change anything)
 #
 # I use the Home Assistant Mosquitto broker add-on.
 #
@@ -43,7 +43,7 @@ host = os.environ.get('ENVOY_HOST', '')
 # envoy installer password - generate from seperate python script
 password = os.environ.get('ENVOY_PW', '')
 #
-####  End Settings - no changes after this line
+# -------  End Settings - no changes after this line
 #
 #
 
